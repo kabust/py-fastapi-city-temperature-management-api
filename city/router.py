@@ -9,7 +9,7 @@ router = APIRouter()
 
 @router.get("/cities/", response_model=list[schemas.City])
 def read_all_cities(db: Session = Depends(get_db)):
-    return crud.get_all_cities(db=db)
+    return crud.get_all_cities(db)
 
 
 @router.get("/cities/{city_id}/", response_model=schemas.City)

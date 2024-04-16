@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-import models, schemas
+from city import models, schemas
 
 
 def get_all_cities(db: Session):
@@ -11,6 +11,14 @@ def get_city_by_id(db: Session, city_id: int):
     return (
         db.query(models.DBCity).
         filter(models.DBCity.id == city_id).
+        first()
+    )
+
+
+def get_city_by_name(db: Session, name: str):
+    return (
+        db.query(models.DBCity).
+        filter(models.DBCity.name == name).
         first()
     )
 

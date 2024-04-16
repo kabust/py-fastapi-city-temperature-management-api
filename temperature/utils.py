@@ -13,13 +13,12 @@ async def get_temperature(city_name: str):
     async with httpx.AsyncClient() as client:
         response = await client.get(
             url=URL,
-            params={"key": os.getenv("WEATHERAPI"), "q": city_name, "aqi": "no"}
+            params={"key": os.getenv("WEATHERAPI"), "q": city_name, "aqi": "no"},
         )
 
         if response.status_code != 200:
             raise HTTPException(
-                status_code=response.status_code,
-                detail="Error during fetching"
+                status_code=response.status_code, detail="Error during fetching"
             )
 
         response = response.json()

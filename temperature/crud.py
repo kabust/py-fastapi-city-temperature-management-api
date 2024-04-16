@@ -16,7 +16,7 @@ async def update_temperature_for_all_cities(db: Session):
         db_temperature = models.DBTemperature(
             city_id=city.id,
             date_time=datetime.now(),
-            temperature=await get_temperature(city_name)
+            temperature=await get_temperature(city_name),
         )
         db.add(db_temperature)
         db.commit()
@@ -31,7 +31,6 @@ def get_all_temperature_records(db: Session):
 
 
 def get_temperature_by_city_id(db: Session, city_id: int):
-    return (
-        db.query(models.DBTemperature).
-        filter(models.DBTemperature.city_id == city_id)
+    return db.query(models.DBTemperature).filter(
+        models.DBTemperature.city_id == city_id
     )

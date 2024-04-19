@@ -2,6 +2,8 @@ from datetime import datetime
 
 from pydantic import BaseModel
 
+from city.models import DBCity
+
 
 class TemperatureBase(BaseModel):
     city_id: int
@@ -15,6 +17,7 @@ class TemperatureCreate(TemperatureBase):
 
 class Temperature(TemperatureBase):
     id: int
+    city_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True

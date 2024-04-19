@@ -4,12 +4,13 @@ import httpx
 from dotenv import load_dotenv
 from fastapi import HTTPException
 
+
 load_dotenv()
 
 URL = "http://api.weatherapi.com/v1/current.json?"
 
 
-async def get_temperature(city_name: str):
+async def get_temperature(city_name: str) -> tuple:
     async with httpx.AsyncClient() as client:
         response = await client.get(
             url=URL,
@@ -23,4 +24,4 @@ async def get_temperature(city_name: str):
 
         response = response.json()
 
-    return response["current"]["temp_c"]
+        return city_name, response["current"]["temp_c"]
